@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish": "surge dist rhbp.surge.sh",
+    "deploy": "pnpm build && pnpm publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

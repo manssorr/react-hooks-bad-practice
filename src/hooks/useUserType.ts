@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useUserStore } from '@/lib/store';
+import { useUserStore, UserType } from '@/lib/store';
 
 // BAD Implementation - Subscribes to entire store and performs unnecessary work
 export const useBadUserType = () => {
@@ -9,10 +9,13 @@ export const useBadUserType = () => {
   // Expensive computation on every render
   const normalizedType = (() => {
     let result = store.userType;
-    // Unnecessary string operations
+    // Unnecessary string operations that maintain the UserType
     for (let i = 0; i < 1000; i++) {
-      result = result.toLowerCase().toUpperCase();
+      // Convert to string for operations, then cast back to UserType
+      const temp = result.toLowerCase().toUpperCase() as UserType;
+      result = temp;
     }
+    // For display purposes only, not affecting the actual UserType value
     return result.toLowerCase();
   })();
   
