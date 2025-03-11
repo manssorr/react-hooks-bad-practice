@@ -1,10 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useBadUserManager } from '@/hooks/useBadUserManager';
 import { useGoodUserManager } from '@/hooks/useGoodUserManager';
+import { useRenderCounter } from '@/hooks/useRenderCounter';
 
 export const BadUserProfile = () => {
   const { user, isActive, getUserFullName, toggleStatus, logout } = useBadUserManager();
+  const { count } = useRenderCounter();
   
   if (!user) return <div>Please log in</div>;
   
@@ -12,7 +15,13 @@ export const BadUserProfile = () => {
   const randomKey = Math.random();
   
   return (
-    <Card key={randomKey}>
+    <Card key={randomKey} className="relative">
+      <Badge 
+        variant="secondary"
+        className="absolute -top-2 -right-2 font-mono"
+      >
+        Renders: {count}
+      </Badge>
       <CardHeader>
         <CardTitle>Bad User Profile</CardTitle>
       </CardHeader>
@@ -34,11 +43,18 @@ export const BadUserProfile = () => {
 
 export const GoodUserProfile = () => {
   const { user, isActive, getUserFullName, toggleStatus, logout } = useGoodUserManager();
+  const { count } = useRenderCounter();
   
   if (!user) return <div>Please log in</div>;
   
   return (
-    <Card>
+    <Card className="relative">
+      <Badge 
+        variant="secondary"
+        className="absolute -top-2 -right-2 font-mono"
+      >
+        Renders: {count}
+      </Badge>
       <CardHeader>
         <CardTitle>Good User Profile</CardTitle>
       </CardHeader>

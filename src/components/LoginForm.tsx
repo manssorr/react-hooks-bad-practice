@@ -1,13 +1,16 @@
 import {useState} from "react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Badge} from "@/components/ui/badge";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {useBadUserManager} from "@/hooks/useBadUserManager";
+import {useRenderCounter} from "@/hooks/useRenderCounter";
 
 export const LoginForm = () => {
 	const [firstName, setFirstName] = useState("Test");
 	const [lastName, setLastName] = useState("User");
 	const {loginUser} = useBadUserManager();
+	const {count} = useRenderCounter();
 
 	const handleLogin = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -19,7 +22,13 @@ export const LoginForm = () => {
 	};
 
 	return (
-		<Card>
+		<Card className="relative">
+			<Badge 
+				variant="secondary"
+				className="absolute -top-2 -right-2 font-mono"
+			>
+				Renders: {count}
+			</Badge>
 			<CardHeader>
 				<CardTitle>Login</CardTitle>
 			</CardHeader>

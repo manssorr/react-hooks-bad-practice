@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useBadUserType, useGoodUserType } from '@/hooks/useUserType';
 import { useUserStore } from '@/lib/store';
 import type { UserType } from '@/lib/store';
+import { useRenderCounter } from '@/hooks/useRenderCounter';
 
 export const BadUserType = () => {
   const { normalizedType, originalType } = useBadUserType();
   const { updateUserType } = useUserStore();
+  const { count } = useRenderCounter();
   
   const changeType = () => {
     const types: UserType[] = ['STANDARD', 'PREMIUM', 'ADMIN'];
@@ -16,7 +19,13 @@ export const BadUserType = () => {
   };
   
   return (
-    <Card>
+    <Card className="relative">
+      <Badge 
+        variant="secondary"
+        className="absolute -top-2 -right-2 font-mono"
+      >
+        Renders: {count}
+      </Badge>
       <CardHeader>
         <CardTitle>Bad User Type</CardTitle>
       </CardHeader>
@@ -33,6 +42,7 @@ export const BadUserType = () => {
 export const GoodUserType = () => {
   const { normalizedType, originalType } = useGoodUserType();
   const updateUserType = useUserStore((state) => state.updateUserType);
+  const { count } = useRenderCounter();
   
   const changeType = () => {
     const types: UserType[] = ['STANDARD', 'PREMIUM', 'ADMIN'];
@@ -42,7 +52,13 @@ export const GoodUserType = () => {
   };
   
   return (
-    <Card>
+    <Card className="relative">
+      <Badge 
+        variant="secondary"
+        className="absolute -top-2 -right-2 font-mono"
+      >
+        Renders: {count}
+      </Badge>
       <CardHeader>
         <CardTitle>Good User Type</CardTitle>
       </CardHeader>
