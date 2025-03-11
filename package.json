@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "publish": "surge dist rhbp.surge.sh",
-    "deploy": "pnpm build && pnpm publish"
+    "deploy": "npm build && npm publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
